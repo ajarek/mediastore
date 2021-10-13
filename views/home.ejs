@@ -1,0 +1,56 @@
+<%-include('./partials/header')%>
+<%-include('./partials/navHome')%>
+<div class="container d-flex flex-column align-items-center w-100  ">
+
+    <% myhome.forEach(hm=>{%>
+    <div class="row d-flex  w-75 my-5 myDiv">
+        <h3 class="title"><%=hm.title%></h3>
+        <div class="col-lg-6 mt-3 " style="transform:rotateY(0deg) "><img src="<%=hm.photo%>" alt="" class="img"> </div>
+
+        <div class="col-lg-6  d-flex flex-column align-items-center justify-content-center mt-3">
+            <ul>
+                <li><%=hm.desc1%></li>
+                <li><%=hm.desc2%></li>
+                <li><%=hm.desc3%></li>
+                <li><%=hm.desc4%></li>
+                <li><%=hm.desc5%></li>
+                <li><%=hm.desc6%></li>
+            </ul>
+            <h2 class="text-danger"><%=hm.price%><span><sup>00</sup>zł</span></h2>
+            <form action="/cart/" method="post">
+                
+            <input type="hidden" id="cartTitle" name="title" value="<%=hm.title%>">
+            <input type="hidden" id="cartPhoto" name="photo" value="<%=hm.photo%>">
+            <input type="hidden" id="cartPrice" name="price" value="<%=hm.price%>">
+            <button type="submit" class="btn btn-warning buy" >KUP W SKLEPIE</button>
+        </form>
+        </div>
+    </div>
+    <%})%>
+    
+  
+</div>
+<script>
+    function myFunction() {
+        const input = document.querySelector("#search");
+        let filter = input.value.toUpperCase();
+         let mydiv=document.querySelectorAll('.myDiv')
+        let names = document.querySelectorAll(".title");
+        const btn=document.querySelector('#searchBtn')
+        names.forEach((name,index) => {
+            
+            
+            if (name) {
+                
+             const txtValue = name.innerHTML;
+             
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+               mydiv[index].classList.add("d-block");
+              } else {
+               mydiv[index].classList.add("d-none");
+              }
+            }
+        })
+    }
+</script>
+<%-include('./partials/footer')%>

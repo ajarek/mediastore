@@ -1,9 +1,11 @@
 const router =require('express').Router()
 const Mobile = require('../models/Mobile')
 const bcrypt = require('bcrypt')
+const authenticate = require('../middleware/auth')
 
-router.get('/admin',(req,res)=>{
-    res.render('admin')
+router.get('/admin',authenticate,(req,res)=>{
+    let Name= req.query.data
+    res.render('admin',{data:Name})
 })
 .post('/admin', (req, res) => {
     
